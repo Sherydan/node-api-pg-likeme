@@ -9,4 +9,7 @@ app.use(express.json());
 
 app.listen(3000, console.log("¡Servidor encendido!"));
 
-getDate()
+
+app.get("/posts", async (req, res) => {
+    
+})

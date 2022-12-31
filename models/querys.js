@@ -12,5 +12,12 @@ const getDate = async () => {
     console.log(result);
 };
 
+const getPosts = async () => {
+    const {rows} = await pool.query("SELECT * FROM posts")
+    return rows
+}
+
+
+
 
 module.exports = {getDate}
