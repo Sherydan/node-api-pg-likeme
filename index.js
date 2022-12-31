@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 
 const {getDate} = require('./models/querys')
-
+app.use(express.static('public'))
 app.use(cors())
 app.use(express.json());
 
