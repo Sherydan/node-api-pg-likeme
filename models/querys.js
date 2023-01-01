@@ -17,11 +17,11 @@ const getPosts = async () => {
     return rows
 }
 
-const addPost = async (title, img, description, likes=7) => {
-    const consulta = "INSERT INTO posts VALUES (DEFAULT, $1, $2, $3)"
-    const values = [title, img, description]
+const addPost = async (payload) => {
+    const consulta = "INSERT INTO posts VALUES (DEFAULT, $1, $2, $3, $4)"
+    const values = [payload.titulo, payload.url, payload.descripcion, 0]
     const result = await pool.query(consulta, values)
-    console.log("post added")
+    return result.rows
 }
 
 module.exports = {getPosts, addPost}
