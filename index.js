@@ -9,10 +9,13 @@ app.use(express.json());
 
 app.listen(3000, console.log("¡Servidor encendido!"));
 
-app.get("/", (req, res) => {
-    try {
-        return res.sendFile(__dirname + "/public/index.html")
-    } catch (error) {
-        res.status(404).send(error)
-    }
+
+app.get("/posts", async (req, res) => {
+    const posts = await getPosts();
+    res.json(posts)
+})
+
+app.post("/posts", async (req,res) => {
+    const {titulo, img, descripcion} = req.body
+    await addPost(titulo, img, descripcion)
 })
