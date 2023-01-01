@@ -9,4 +9,10 @@ app.use(express.json());
 
 app.listen(3000, console.log("¡Servidor encendido!"));
 
-getDate()
+app.get("/", (req, res) => {
+    try {
+        return res.sendFile(__dirname + "/public/index.html")
+    } catch (error) {
+        res.status(404).send(error)
+    }
+})
