@@ -7,6 +7,8 @@ const CsbInspector = require('csb-inspector')
 CsbInspector()
 
 const {getPosts, addPost} = require('./models/querys')
+const {validateInput} = require("./helpers/validation")
+
 app.use(express.static('public'))
 app.use(cors())
 app.use(express.json());
@@ -31,7 +33,13 @@ app.get("/posts", async (req, res) => {
 
 app.post("/posts", async (req,res) => {
     const payload = req.body
-    await addPost(payload)
+    if (!validateInput(payload)) {
+        res.status(400).send("all fields are required")
+        return
+    } else {
+        await addPost(payload)
+    }
+    
 })
 
 
