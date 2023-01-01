@@ -24,7 +24,4 @@ const addPost = async (title, img, description, likes=7) => {
     console.log("post added")
 }
 
-
-
-
 module.exports = {getPosts, addPost}
