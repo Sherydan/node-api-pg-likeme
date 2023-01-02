@@ -30,7 +30,7 @@ app.get("/posts", async (req, res) => {
         const posts = await getPosts();
         res.json(posts);
     } catch (error) {
-        res.status(404).send('internal server error')
+        res.status(204).send('no posts found')
     }
 });
 
