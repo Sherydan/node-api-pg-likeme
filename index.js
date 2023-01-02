@@ -41,5 +41,6 @@ app.post("/posts", async (req, res) => {
         return;
     } else {
         await addPost(payload);
+        res.status(200).send("new post added")
     }
 });
