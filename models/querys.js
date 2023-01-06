@@ -17,7 +17,7 @@ const addPost = async (payload) => {
         const result = await pool.query(consulta, values);
         return result.rows;
     } catch (error) {
-        console.log("Error adding post");
+        console.log(error);
         return error
     }
 };
