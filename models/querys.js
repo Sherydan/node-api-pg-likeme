@@ -22,4 +22,29 @@ const addPost = async (payload) => {
     }
 };
 
-module.exports = { getPosts, addPost };
+const addLike = async (payload) => {
+    const consulta = "UPDATE posts SET likes =$1 WHERE id=$2"
+    const values = [payload.likes, payload.id]
+    try {
+        const result = await pool.query(consulta, values)
+        return result.rows
+    } catch (error) {
+        console.log("error while updating posts", error.code, error.message)
+        throw new Error(error)
+    }
+}
+
+const findPost = async (payload) => {
+    const consulta = "SELECT * FROM posts WHERE id=$1"
+    const values = [payload]
+
+    try {
+        const result = await pool.query(consulta, values)
+        return result.rows
+    } catch (error) {
+        console.log("error while searching post", error.code, error.message);
+        throw new Error(error)
+    }
+}
+
+module.exports = { getPosts, addPost, addLike, findPost };
