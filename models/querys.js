@@ -36,6 +36,7 @@ const addLike = async (payload) => {
 }
 
 const findPost = async (payload) => {
+    console.log(payload);
     const consulta = "SELECT * FROM posts WHERE id=$1"
     const values = [payload]
 

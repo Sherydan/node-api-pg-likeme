@@ -21,7 +21,6 @@ const addNewPost = async (req, res) => {
 };
 
 const addLikePost = async (req, res) => {
-    
     const { id } = req.params;
     const payload = req.body;
     payload.id = id;
@@ -43,14 +42,15 @@ const deletePostById = async (req, res) => {
     const { id } = req.params
 
     try {
-        const existsPost = findPost(id)
+        const existsPost = await findPost(id)
+        console.log(existsPost);
 
         if (existsPost.length === 0) {
             return res.status(404).json({message: "posts doesnt exists"})
         }
 
         await deletePost(id)
-        res.json({message: "Post deleted"})
+        res.status(200).json({message: "Post deleted"})
     } catch (error) {
         console.log(error);
         res.status(500).json({message: "error while deleting post"})
