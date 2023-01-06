@@ -23,8 +23,9 @@ const addPost = async (payload) => {
 };
 
 const addLike = async (payload) => {
-    const consulta = "UPDATE posts SET likes =$1 WHERE id=$2"
-    const values = [payload.likes, payload.id]
+    
+    const consulta = "UPDATE posts SET likes = likes + 1 WHERE id=$1"
+    const values = [payload.id]
     try {
         const result = await pool.query(consulta, values)
         return result.rows
@@ -47,4 +48,17 @@ const findPost = async (payload) => {
     }
 }
 
-module.exports = { getPosts, addPost, addLike, findPost };
+const deletePost = async (payload) => {
+    const consulta = "DELETE FROM posts WHERE id = $1"
+    const values = [payload]
+
+    try {
+        const result = await pool.query(consulta, values)
+        return result.rows
+    } catch (error) {
+        console.log("error while deleting post", error.code, error.message)
+        throw new Error(error)
+    }
+}
+
+module.exports = { getPosts, addPost, addLike, findPost, deletePost };
